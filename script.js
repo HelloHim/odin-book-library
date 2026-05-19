@@ -31,16 +31,22 @@ function createBookTable(myLibrary) {
   // Get reference to the table element from the HTML
   const table = document.getElementById("libraryTable");
 
-  // Add column headers based on book properties
-  getColumnHeaders(table, myLibrary);
+  // Add column headers based on book properties, if the table is not empty
+  if (myLibrary.length == 1) {
+    getColumnHeaders(table, myLibrary);
+  }
 
   // Get the table body where rows will be added
   const tbody = table.tBodies[0];
 
-  // Loop through each book in the library
+  // Loop through each book in the library, skipping all but the last entry
+  // to avoid duplicating rows already in the table on each addBookToLibrary call
   myLibrary.forEach((objectElement, index) => {
+    if ((index + 1) < myLibrary.length) {
+      return;
+    }
     // Create a new row in the table for this book
-    const newRow = tbody.insertRow(index);
+    const newRow = tbody.insertRow(0);
 
     // Loop through each property of the book (id, name, author, status)
     for (const key in objectElement) {
@@ -82,3 +88,12 @@ function getColumnHeaders(table, myLibrary) {
 
 // test
 addBookToLibrary("Harry Potter & the Curse of the Honoured One", "Gojo", true);
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", true);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", false);
+addBookToLibrary("1984", "George Orwell", true);
+addBookToLibrary("Pride and Prejudice", "Jane Austen", false);
+addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", true);
+addBookToLibrary("Brave New World", "Aldous Huxley", false);
+addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", true);
+addBookToLibrary("Dune", "Frank Herbert", false);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", true);
