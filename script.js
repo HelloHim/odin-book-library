@@ -49,6 +49,13 @@ function createBookTable(myLibrary) {
       
       // Add the book property value to the cell
       cell.textContent = objectElement[key];
+      
+      // Set the cell text to "Read" or "Not Read" based on the book's status.
+      if (objectElement[key]) {
+        cell.textContent = "Read";
+      } else {
+        cell.textContent = "Not Read";
+      }
     }
   });
 }
