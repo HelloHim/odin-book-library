@@ -8,22 +8,36 @@
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <h1>Book Library</h1>
-    <form action="" method="get">
-      <label for="bookName">Book</label>
-      <input type="text" name="bookName" id="bookName" required />
-      <label for="author">Author</label>
-      <input type="text" name="author" id="author" required />
-      <label for="readStatus">Status</label>
-      <select name="readStatus" id="readStatus" required>
-        <option value="read">Read</option>
-        <option value="notRead">Not Read</option>
-      </select>
-      <button>Submit</button>
-    </form>
-    <table id="libraryTable">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
+    <div class="container">
+      <h1>Book Library</h1>
+      <form action="" method="get">
+        <div class="inputWrapper">
+          <label for="bookName">Book</label>
+          <input type="text" name="bookName" id="bookName" required />
+        </div>
+
+        <div class="inputWrapper">
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" required />
+        </div>
+
+        <div class="inputWrapper">
+          <label for="readStatus">Status</label>
+          <select name="readStatus" id="readStatus" required>
+            <option value="read">Read</option>
+            <option value="notRead">Not Read</option>
+          </select>
+        </div>
+
+        <div class="submitWrapper">
+          <button>Submit</button>
+        </div>
+      </form>
+
+      <table id="libraryTable">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </body>
 </html>

@@ -1,7 +1,51 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   font-family: sans-serif;
 }
 
+div.container {
+  display: grid;
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 64px;
+  max-width: 960px;
+}
+
+div.container > * {
+  margin-bottom: 24px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* Holy Albatross: huge negative basis (> breakpoint) = one row | huge 
+  positive basis (< breakpoint) = all stack */
+  flex: 1 1 calc((38rem - 100%) * 999);
+  min-width: 0;
+}
+
+.inputWrapper input,
+.inputWrapper select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.submitWrapper {
+  /* always claim a full row so the button sits below everything else */
+  flex-basis: 100%;
+}
 table {
   border-collapse: collapse;
   border: 2px solid rgb(200, 200, 200);
