@@ -173,11 +173,5 @@ document.getElementById("libraryTable").addEventListener("click", function (even
 // test
 addBookToLibrary("Harry Potter & the Curse of the Honoured One", "Gojo", true);
 addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", true);
-// addBookToLibrary("To Kill a Mockingbird", "Harper Lee", false);
-// addBookToLibrary("1984", "George Orwell", true);
-// addBookToLibrary("Pride and Prejudice", "Jane Austen", false);
-// addBookToLibrary("The Catcher in the Rye", "J.D. Salinger", true);
-// addBookToLibrary("Brave New World", "Aldous Huxley", false);
-// addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", true);
-// addBookToLibrary("Dune", "Frank Herbert", false);
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", true);
+addBookToLibrary("Dune", "Frank Herbert", false);
+addBookToLibrary("The Hobbit", "J.R.R. Tolkien", true);

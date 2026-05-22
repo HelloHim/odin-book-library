@@ -4,8 +4,10 @@
   padding: 0;
 }
 
-html {
-  font-family: sans-serif;
+body {
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  color: #222;
+  background-color: #fff;
 }
 
 div.container {
@@ -20,6 +22,11 @@ div.container > * {
   margin-bottom: 24px;
 }
 
+h1 {
+  font-weight: 300;
+  font-size: 4rem;
+}
+
 form {
   display: flex;
   flex-wrap: wrap;
@@ -30,8 +37,8 @@ form {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  /* Holy Albatross: huge negative basis (> breakpoint) = one row | huge 
-  positive basis (< breakpoint) = all stack */
+  /* Holy Albatross: huge negative basis (> breakpoint) = one row | 
+  huge positive basis (< breakpoint) = all stack */
   flex: 1 1 calc((38rem - 100%) * 999);
   min-width: 0;
 }
@@ -39,52 +46,126 @@ form {
 .inputWrapper input,
 .inputWrapper select {
   width: 100%;
-  box-sizing: border-box;
+  height: 38px;
+  padding: 6px 10px;
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.inputWrapper input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.inputWrapper input:focus,
+.inputWrapper select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .submitWrapper {
-  /* always claim a full row so the button sits below everything else */
+  /* Always claim a full row so the button sits below everything else */
   flex-basis: 100%;
 }
+
+.submitWrapper button {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #fff;
+  background-color: #33C3F0;
+  border: 1px solid #33C3F0;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.submitWrapper button:hover,
+.submitWrapper button:focus {
+  background-color: #1EAEDB;
+  border-color: #1EAEDB;
+  outline: 0;
+}
+
 table {
   border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
-  letter-spacing: 1px;
-  font-size: 0.8rem;
-  background-color: rgb(245, 245, 245);
+  width: 100%;
+  font-size: 1rem;
 }
 
-thead {
-  font-weight: bold;
-}
-
-td,
-th {
-  border: 1px solid rgb(190, 190, 190);
-  padding: 10px 20px;
-}
-
-th {
-  background-color: rgb(235, 235, 235);
-}
-
+th,
 td {
-  text-align: center;
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #E1E1E1;
 }
 
-tr:nth-child(even) td {
-  background-color: rgb(250, 250, 250);
+th:first-child,
+td:first-child {
+  padding-left: 0;
 }
 
-tr:nth-child(odd) td {
-  background-color: rgb(245, 245, 245);
-}
-
-caption {
-  padding: 10px;
+th:last-child,
+td:last-child {
+  padding-right: 0;
 }
 
 .readStatusButton {
-  /* Tell browser to never break the button text onto a 2nd line */
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  background-color: transparent;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+}
+
+.readStatusButton:hover,
+.readStatusButton:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0;
+}
+
+.deleteButton {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #fff;
+  background-color: rgb(228, 26, 103);
+  border: 1px solid rgb(228, 26, 103);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: rgb(207, 24, 94);
+  border-color: rgb(207, 24, 94);
 }
