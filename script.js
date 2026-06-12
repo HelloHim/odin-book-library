@@ -1,17 +1,18 @@
 // Array to store all books in the library
 const myLibrary = [];
 
-// Constructor function to create a new Book object
-function Book(id, name, author, status) {
-  this.id = id; // unique identifier (UUID)
-  this.name = name;
-  this.author = author;
-  this.status = status; // boolean: true = read, false = not read
-}
+class Book {
+  constructor(id, name, author, status) {
+    this.id = id; // unique identifier (UUID)
+    this.name = name;
+    this.author = author;
+    this.status = status; // boolean: true = read, false = not read
+  }
 
-Book.prototype.changeReadStatus = function() {
-  this.status = !(this.status);
-};
+  changeReadStatus() {
+    this.status = !this.status;
+  }
+}
 
 // Adds a new book to the library and updates the display
 function addBookToLibrary(name, author, status) {
