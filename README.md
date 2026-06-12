@@ -14,11 +14,12 @@ A browser-based personal library tracker built as part of [The Odin Project](htt
 
 - HTML
 - CSS (responsive form layout using the Holy Albatross flexbox technique)
-- Vanilla JavaScript (constructor functions, prototype methods, event delegation)
+- Vanilla JavaScript (ES6 classes, event delegation)
 
 ## Concepts Practiced
 
-- Constructor functions and prototype methods (`Book`, `Book.prototype.changeReadStatus`)
+- Refactored from constructor functions and prototype methods to ES6 classes
+- ES6 classes (`Book` class with `changeReadStatus` as a class method)
 - Separating data (the `myLibrary` array) from the display logic (DOM rendering)
 - Using `data-*` attributes to link DOM rows back to their book objects
 - Event delegation on the table for delete and read-status toggling
