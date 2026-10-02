@@ -10,15 +10,17 @@
   <body>
     <div class="container">
       <h1>Book Library</h1>
-      <form action="" method="get">
+      <form action="" method="get" novalidate>
         <div class="inputWrapper">
           <label for="bookName">Book</label>
           <input type="text" name="bookName" id="bookName" required />
+          <span class="error"></span>
         </div>
 
         <div class="inputWrapper">
           <label for="author">Author</label>
           <input type="text" name="author" id="author" required />
+          <span class="error"></span>
         </div>
 
         <div class="inputWrapper">

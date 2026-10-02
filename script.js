@@ -112,64 +112,133 @@ function getColumnHeaders(table, myLibrary) {
   });
 }
 
+// The input and the error span that directly follows it in the markup
+const bookName = document.querySelector("#bookName");
+const bookNameError = document.querySelector("#bookName+.error");
+
+/**
+ * Shows or clears the error message and red border for the book name field.
+ * Called on submit only, so the user is not nagged while still typing.
+ */
+function validateBook() {
+  // A leftover custom message would keep the field invalid even once it is
+  // filled in, so reset it before re-checking
+  bookName.setCustomValidity("");
+
+  if (bookName.checkValidity()) {
+    bookNameError.textContent = "";
+    bookName.setCustomValidity("");
+  } else if (bookName.validity.valueMissing) {
+    bookNameError.textContent = "The book name must be filled!";
+    bookName.setCustomValidity("The book name must be filled!");
+  }
+
+  bookName.classList.toggle("error", !bookName.checkValidity());
+}
+
+// Clear the error as soon as the user starts correcting the field
+bookName.addEventListener("input", () => {
+  bookName.setCustomValidity("");
+  bookNameError.textContent = "";
+  bookName.classList.toggle("error", !bookName.checkValidity());
+});
+
+const author = document.querySelector("#author");
+const authorError = document.querySelector("#author+.error");
+
+// Same behaviour as validateBook, for the author field
+function validateAuthor() {
+  author.setCustomValidity("");
+
+  if (author.checkValidity()) {
+    authorError.textContent = "";
+    author.setCustomValidity("");
+  } else if (author.validity.valueMissing) {
+    authorError.textContent = "The author name must be filled!";
+    author.setCustomValidity("The author name must be filled!");
+  }
+
+  author.classList.toggle("error", !author.checkValidity());
+}
+
+author.addEventListener("input", () => {
+  author.setCustomValidity("");
+  authorError.textContent = "";
+  author.classList.toggle("error", !author.checkValidity());
+});
+
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // Stop page from reloading
 
-  // Read form values
-  const bookName = document.querySelector("#bookName").value;
-  const author = document.querySelector("#author").value;
-  // Use let so we can reassign to a boolean below
-  let readStatus = document.querySelector("#readStatus").value;
-
-  // Convert the select string value ("read"/"notRead") to a boolean
-  if (readStatus == "read") {
-    readStatus = true;
+  // The form has novalidate, so the browser will not block submission itself.
+  // checkValidity() still runs, so use it to decide whether to show errors
+  // or add the book.
+  if (!form.checkValidity()) {
+    validateAuthor();
+    validateBook();
   } else {
-    readStatus = false;
+    // Read form values
+    const bookNameValue = document.querySelector("#bookName").value;
+    const authorValue = document.querySelector("#author").value;
+    // Use let so we can reassign to a boolean below
+    let readStatus = document.querySelector("#readStatus").value;
+  
+    // Convert the select string value ("read"/"notRead") to a boolean
+    if (readStatus == "read") {
+      readStatus = true;
+    } else {
+      readStatus = false;
+    }
+  
+    addBookToLibrary(bookNameValue, authorValue, readStatus);
   }
 
-  addBookToLibrary(bookName, author, readStatus);
 });
 
 // Listen for clicks anywhere on the table
-document.getElementById("libraryTable").addEventListener("click", function (event) {
-  if (event.target.className === "deleteButton") {
-    const row = event.target.closest("tr");
+document
+  .getElementById("libraryTable")
+  .addEventListener("click", function (event) {
+    if (event.target.className === "deleteButton") {
+      const row = event.target.closest("tr");
 
-    // Read the ID stored in data-id to find the matching book in the array
-    const bookRowId = row.dataset.id;
-    const index = myLibrary.findIndex((book) => book.id === bookRowId);
+      // Read the ID stored in data-id to find the matching book in the array
+      const bookRowId = row.dataset.id;
+      const index = myLibrary.findIndex((book) => book.id === bookRowId);
 
-    // Remove the book from the MyLibrary array,
-    myLibrary.splice(index, 1);
-    // Remove this row in the  directly from the DOM (remove row from the table on screen)
-    row.remove();
-  }
-});
+      // Remove the book from the MyLibrary array,
+      myLibrary.splice(index, 1);
+      // Remove this row in the  directly from the DOM (remove row from the table on screen)
+      row.remove();
+    }
+  });
 
 // Listen for clicks anywhere on the table
-document.getElementById("libraryTable").addEventListener("click", function (event) {
-  // Only act if the clicked element is a read status button
-  if (event.target.className === "readStatusButton") {
-    // Walk up the DOM to find the row this button belongs to
-    const row = event.target.closest("tr");
+document
+  .getElementById("libraryTable")
+  .addEventListener("click", function (event) {
+    // Only act if the clicked element is a read status button
+    if (event.target.className === "readStatusButton") {
+      // Walk up the DOM to find the row this button belongs to
+      const row = event.target.closest("tr");
 
-    // Read the ID stored in data-id to find the matching book in the array
-    const bookRowId = row.dataset.id;
+      // Read the ID stored in data-id to find the matching book in the array
+      const bookRowId = row.dataset.id;
 
-    // Find the index of the book in myLibrary whose id matches the row's data-id
-    const index = myLibrary.findIndex((book) => book.id === bookRowId);
+      // Find the index of the book in myLibrary whose id matches the row's data-id
+      const index = myLibrary.findIndex((book) => book.id === bookRowId);
 
-    // Toggle the read status on the book object using the prototype method
-    myLibrary[index].changeReadStatus();
+      // Toggle the read status on the book object using the prototype method
+      myLibrary[index].changeReadStatus();
 
-    // Update the button text to reflect the new status
-    // If status is true → "Read", if false → "Not Read"
-    event.target.textContent = myLibrary[index].status ? "Read" : "Not Read";
-  }
-});
+      // Update the button text to reflect the new status
+      // If status is true → "Read", if false → "Not Read"
+      event.target.textContent = myLibrary[index].status ? "Read" : "Not Read";
+    }
+  });
 
 // test
 addBookToLibrary("Harry Potter & the Curse of the Honoured One", "Gojo", true);
